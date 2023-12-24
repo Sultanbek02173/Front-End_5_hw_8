@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Table, Button } from 'react-bootstrap';
-import fetchAllCartItems, { fetchToAddItem } from '../../store/reducer/CartCreated';
+import fetchAllCartItems, { fetchToAddItem, fetchToDeleteItem, fetchToRemoveItem } from '../../store/reducer/CartCreated';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -9,11 +9,13 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(fetchAllCartItems());
-    }, [])
+    }, [dispatch]);
 
     const renderItem = (item, idx) => {
         const { title, id, count, total } = item;
         const onAddToCart = () => dispatch(fetchToAddItem(id));
+        const onRemoveToCart = () => dispatch(fetchToRemoveItem(id));
+        const onDeleteToCart = () => dispatch(fetchToDeleteItem(id));
 
         return (
             <tr key={`item-${id}`}>
@@ -25,10 +27,10 @@ const Cart = () => {
                     <Button onClick={onAddToCart} className="mx-1" variant='outlin-success'>
                         <i className='fa-solid fa-plus'></i>
                     </Button>
-                    <Button className="mx-1" variant='outlin-success'>
+                    <Button onClick={onRemoveToCart} className="mx-1" variant='outlin-success'>
                         <i className='fa-solid fa-minus'></i>
                     </Button>
-                    <Button className="mx-1" variant='outlin-success'>
+                    <Button onClick={onDeleteToCart} className="mx-1" variant='outlin-success'>
                         <i className='fa-solid fa-trash'></i>
                     </Button>
                 </td>
@@ -61,6 +63,19 @@ const Cart = () => {
                     <tbody>
                         {cart.map(renderItem)}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Итог:</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{
+                                cart.reduce((acc, rec) => {
+                                    return acc + (rec.total)
+                                }, 0)
+                            }$</th>
+                        </tr>
+                    </tfoot>
                 </Table>
             ) : (
                 cases[cartStatus]

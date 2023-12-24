@@ -31,22 +31,22 @@
   ],
   "cart": [
     {
-      "total": 180,
-      "title": "Proudction-Readi Microservices",
-      "id": 1,
-      "count": 5
-    },
-    {
-      "total": 156,
-      "title": "Harry Potter and the Sorcerer's Stone",
-      "id": 2,
-      "count": 3
-    },
-    {
-      "total": 66,
       "title": "The Seawolf",
       "id": 4,
-      "count": 3
+      "count": 9,
+      "total": 198
+    },
+    {
+      "title": "All Good Perople Here: A Novel",
+      "id": 3,
+      "count": 4,
+      "total": 88
+    },
+    {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "id": 2,
+      "count": 7,
+      "total": 364
     }
   ]
 }
